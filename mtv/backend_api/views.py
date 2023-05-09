@@ -44,8 +44,8 @@ from rest_framework.response import Response
 #         ]
 #         return Response(output)
 
-def category_detail(request, id):
-    return render(request, 'index.html', {})
+# def category_detail(request, id):
+#     return render(request, 'index.html', {})
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
