@@ -20,8 +20,9 @@ from django.urls import re_path as url
 from backend_api.views import *
 from django.conf.urls.static import static
 from django.conf import settings
-
 from rest_framework import routers
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
+
 
 router = routers.SimpleRouter()
 router.register('category', CategoryViewSet, basename='category')
@@ -30,6 +31,10 @@ router.register('product', ProductViewSet, basename='product')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/users/', include('users.urls')),
+    path('api/token/', TokenObtainPairView.as_view()),
+    path('api/token/refresh/', TokenRefreshView.as_view()),
+    path('api/token/verify/', TokenVerifyView.as_view()),
 #     path('category/<str:slug>/', category_detail)
 #     path('', CategoryView.as_view(), name='category'),
 #     path('', ProductView.as_view(), name='product'),
