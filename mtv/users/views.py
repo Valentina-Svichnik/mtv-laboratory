@@ -15,7 +15,7 @@ class RegisterView(APIView):
         user = serializer.create(serializer.validated_data)
         user = UserSerializer(user)
 
-        return Response(user.data, status = status.HTTP_201_CREATED)
+        return Response(user.data, status=status.HTTP_201_CREATED)
 
 class RetrieveUserView(APIView):
     permission_classes = [permissions.IsAuthenticated]
