@@ -28,6 +28,7 @@ router = routers.SimpleRouter()
 router.register('category', CategoryViewSet, basename='category')
 router.register('partner', PartnerViewSet, basename='partner')
 router.register('product', ProductViewSet, basename='product')
+router.register('customer', CustomerViewSet, basename='customer')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

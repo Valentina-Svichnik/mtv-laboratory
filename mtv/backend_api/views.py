@@ -14,6 +14,7 @@ from .serializer import (
     PartnerSerializer,
     CategoryDetailSerializer,
     ProductDetailSerializer,
+    CustomerSerializer
 #     CommentSerializer,
 )
 from rest_framework.response import Response
@@ -53,3 +54,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class PartnerViewSet(viewsets.ModelViewSet):
     queryset = Partner.objects.all()
     serializer_class = PartnerSerializer
+
+class CustomerViewSet(viewsets.ModelViewSet):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
