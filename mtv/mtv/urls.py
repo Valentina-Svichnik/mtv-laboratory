@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.urls import re_path as url
 from backend_api.views import *
+from users.views import *
 from django.conf.urls.static import static
 from django.conf import settings
 from rest_framework import routers
@@ -29,6 +30,8 @@ router.register('category', CategoryViewSet, basename='category')
 router.register('partner', PartnerViewSet, basename='partner')
 router.register('product', ProductViewSet, basename='product')
 router.register('customer', CustomerViewSet, basename='customer')
+router.register('cartProduct', CartProductViewSet, basename='cartProduct')
+router.register('cart', CartViewSet, basename='cart')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -41,4 +44,5 @@ urlpatterns = [
 #     path('', ProductView.as_view(), name='product'),
 ]
 urlpatterns += router.urls
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

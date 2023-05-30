@@ -132,7 +132,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'assets')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'assets/')
 MEDIA_URL = 'http://localhost:8000/assets/'
 
 # Default primary key field type

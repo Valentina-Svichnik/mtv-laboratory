@@ -24,7 +24,10 @@ const LoginPage = () => {
     const { email, password } = formData;
 
     const onChange = e => {
-        setFormData({...formData, [e.target.name]: e.target.value });
+        if (e.target.name === 'email'){
+            setFormData({...formData, [e.target.name]: e.target.value.toLowerCase() });
+        } else
+            setFormData({...formData, [e.target.name]: e.target.value });
     }
 
     const onSubmit = e => {

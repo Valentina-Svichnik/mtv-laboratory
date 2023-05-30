@@ -1,6 +1,7 @@
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 from rest_framework import serializers
+from .models import  Customer, Cart
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -40,3 +41,26 @@ class UserSerializer(serializers.ModelSerializer):
   class Meta:
     model = User
     fields = ('first_name', 'last_name', 'email',)
+
+
+class CartSerializer(serializers.ModelSerializer):
+  class Meta:
+      model = Cart
+      fields = '__all__'
+
+
+class CustomerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Customer
+        fields = '__all__'
+
+# class CartDetailSerializer(serializers.ModelSerializer):
+#   cart = serializers.SerializerMethodField()
+
+#   class Meta:
+#     model = User
+#     fields = '__all__'
+
+#   @staticmethod
+#   def get_cart(obj):
+#     return  CartSerializer(Cart.objects.filter(owner=obj), many=False).data

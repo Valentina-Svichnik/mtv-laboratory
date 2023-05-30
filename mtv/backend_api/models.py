@@ -1,6 +1,7 @@
 import json
 from django.db import models
 from django.contrib.auth import get_user_model
+from users.models import Cart, Customer
 
 # User = get_user_model()
 
@@ -60,32 +61,32 @@ class Product(models.Model):
         verbose_name_plural = "Товары"
 
 
-class Customer(models.Model):
-    GENDER_MAN = 'м'
-    GENDER_WOMAN = 'ж'
+# class Customer(models.Model):
+#     GENDER_MAN = 'м'
+#     GENDER_WOMAN = 'ж'
 
-    GENDER_CHOICES = (
-        (GENDER_MAN, 'Мужской'),
-        (GENDER_WOMAN, 'Женский')
-    )
+#     GENDER_CHOICES = (
+#         (GENDER_MAN, 'Мужской'),
+#         (GENDER_WOMAN, 'Женский')
+#     )
 
-    first_name = models.CharField(max_length=255, verbose_name='Имя')
-    last_name = models.CharField(max_length=255, verbose_name='Фамилия')
-    login = models.CharField(max_length=45, verbose_name='Логин')
-    password = models.CharField(max_length=45, verbose_name='Пароль')
-    email = models.CharField(max_length=255, verbose_name='Почта')
-    phone = models.CharField(max_length=16, verbose_name='Номер телефона', null=True, blank=True)
-    address = models.CharField(max_length=255, verbose_name='Адрес', null=True, blank=True)
-    birthday = models.DateField(verbose_name='Дата рождения')
-    gender = models.CharField(max_length=1, verbose_name='Пол', choices=GENDER_CHOICES, default=GENDER_MAN)
-    registered = models.BooleanField()
+#     first_name = models.CharField(max_length=255, verbose_name='Имя')
+#     last_name = models.CharField(max_length=255, verbose_name='Фамилия')
+#     login = models.CharField(max_length=45, verbose_name='Логин')
+#     password = models.CharField(max_length=45, verbose_name='Пароль')
+#     email = models.CharField(max_length=255, verbose_name='Почта')
+#     phone = models.CharField(max_length=16, verbose_name='Номер телефона', null=True, blank=True)
+#     address = models.CharField(max_length=255, verbose_name='Адрес', null=True, blank=True)
+#     birthday = models.DateField(verbose_name='Дата рождения')
+#     gender = models.CharField(max_length=1, verbose_name='Пол', choices=GENDER_CHOICES, default=GENDER_MAN)
+#     registered = models.BooleanField()
 
-    def __str__(self):
-        return self.login
+#     def __str__(self):
+#         return self.login
 
-    class Meta:
-        verbose_name = "Клиент"
-        verbose_name_plural = "Клиенты"
+#     class Meta:
+#         verbose_name = "Клиент"
+#         verbose_name_plural = "Клиенты"
 
 #     def __str__(self):
 #         if not (self.user.first_name and self.user.last_name):
@@ -94,8 +95,9 @@ class Customer(models.Model):
 
 
 class CartProduct(models.Model):
-    user = models.ForeignKey('Customer', verbose_name='Покупатель', on_delete=models.CASCADE)
-    cart = models.ForeignKey('Cart', verbose_name='Корзина', on_delete=models.CASCADE, related_name='related_products')
+    # user = models.ForeignKey('Customer', verbose_name='Покупатель', on_delete=models.CASCADE)
+    owner = models.ForeignKey(Customer, verbose_name='Покупатель', on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, verbose_name='Корзина', on_delete=models.CASCADE, related_name='related_products', blank=True, null=True)
     qty = models.PositiveIntegerField(default=1, verbose_name='Количество товара')
     product = models.ForeignKey(Product, verbose_name='Товар', on_delete=models.CASCADE)
     final_price = models.DecimalField(max_digits=15, decimal_places=2, verbose_name='Общая цена')
@@ -107,31 +109,56 @@ class CartProduct(models.Model):
         verbose_name = "Товар в корзине"
         verbose_name_plural = "Товары в корзине"
 
-    def save(self, *args, **kwargs):
-        self.final_price = self.qty * self.product.price * (100 - self.product.sale) * 0.01
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.final_price = self.qty * self.product.price * (100 - self.product.sale) * 0.01
+    #     super().save(*args, **kwargs)
+
+    # def create_cartProduct(self, user, cart, qty, product, final_price):
+    #     cartProduct = self.model(
+    #         user=user,
+    #         cart=cart,
+    #         qty=qty,
+    #         product=product,
+    #         final_price=final_price,
+    #     )
+
+    #     cartProduct.save(using=self._db)
+    #     return cartProduct
 
 
-class Cart(models.Model):
-    owner = models.ForeignKey('Customer', null=True, verbose_name='Владелец', on_delete=models.CASCADE)
-    products = models.ManyToManyField(CartProduct, blank=True, related_name='related_cart')
-    total_products = models.PositiveIntegerField(default=0)
-    final_price = models.DecimalField(max_digits=15, default=0, decimal_places=2, verbose_name='Общая цена')
-    in_order = models.BooleanField(default=False)
-    for_anonymous_user = models.BooleanField(default=False)
+# class Cart(models.Model):
+#     # owner = models.ForeignKey('Customer', null=True, verbose_name='Владелец', on_delete=models.CASCADE)
+#     owner = models.OneToOneField(UserAccount, null=True, verbose_name='Владелец', on_delete=models.CASCADE)
+#     products = models.ManyToManyField(CartProduct, blank=True, related_name='related_cart')
+#     total_products = models.PositiveIntegerField(default=0)
+#     final_price = models.DecimalField(max_digits=15, default=0, decimal_places=2, verbose_name='Общая цена')
+#     in_order = models.BooleanField(default=False)
+#     for_anonymous_user = models.BooleanField(default=False)
 
-    def __str__(self):
-        return str(self.id)
+#     def __str__(self):
+#         return str(self.id)
 
-    class Meta:
-        verbose_name = "Корзина"
-        verbose_name_plural = "Корзина"
+#     class Meta:
+#         verbose_name = "Корзина"
+#         verbose_name_plural = "Корзина"
 
-    def save(self, *args, **kwargs):
-        if self.id:
-            self.total_products = self.products.count()
-            self.final_price = sum([cproduct.final_price for cproduct in self.products.all()])
-        super().save(*args, **kwargs)
+#     def save(self, *args, **kwargs):
+#         if self.id:
+#             self.total_products = self.products.count()
+#             self.final_price = sum([cproduct.final_price for cproduct in self.products.all()])
+#         super().save(*args, **kwargs)
+
+#     def create_cart(self, owner, products, total_products, in_order, for_anonymous_user):
+#         cart = self.model(
+#             owner=owner,
+#             products=products,
+#             total_products=total_products,
+#             in_order=in_order,
+#             for_anonymous_user=for_anonymous_user,
+#         )
+
+#         cart.save(using=self._db)
+#         return cart
 
 class Partner (models.Model):
   partner_name = models.CharField(max_length=45, verbose_name='Название компании')

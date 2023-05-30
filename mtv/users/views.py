@@ -1,7 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import permissions, status
-from .serializers import UserCreateSerializer, UserSerializer
+from rest_framework import permissions, status, viewsets
+from .models import Customer, Cart
+from .serializer import UserCreateSerializer, UserSerializer, CustomerSerializer, CartSerializer
 
 
 class RegisterView(APIView):
@@ -25,3 +26,23 @@ class RetrieveUserView(APIView):
         user = UserSerializer(user)
 
         return Response(user.data, status=status.HTTP_200_OK)
+
+    # action_to_serializer = {
+    #     "retrieve": CartDetailSerializer
+    # }
+
+    # def get_serializer_class(self):
+    #     return self.action_to_serializer.get (
+    #         self.action,
+    #         self.serializer_class
+    #     )
+
+
+class CartViewSet(viewsets.ModelViewSet):
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer
+ 
+
+class CustomerViewSet(viewsets.ModelViewSet):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer    
