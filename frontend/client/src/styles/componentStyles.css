@@ -708,6 +708,33 @@ span{
     color: #B72024;
 }
 
+
+.phone {
+    position: relative;
+  }
+  
+
+/*   
+  input + span {
+    padding-right: 30px;
+  } */
+  
+.phone input:invalid + span::after {
+    position: absolute;
+    content: "✖";
+    top: 30px;
+    padding-left: 5px;
+    color: #B72024;
+}
+  
+.phone input:valid + span::after {
+    position: absolute;
+    content: "✓";
+    padding-left: 5px;
+    top: 30px;
+    color: #8BB37D;
+}
+
 /***********   STYLES FOR SUCCESS PAGE   **************/
 .successPage{
     height: 100vh;

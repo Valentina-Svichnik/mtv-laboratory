@@ -7,7 +7,6 @@ import {Link, useNavigate} from 'react-router-dom';
 import Back from "../../assets/arrow-back.svg";
 import Subscribe from "../subscribe";
 import axios from "axios";
-import { isDisabled } from "@testing-library/user-event/dist/utils";
 
 
 
@@ -152,9 +151,18 @@ const OrderingPage = () => {
                                 <label htmlFor='first_name' className='text'>Имя <span>*</span></label>
                                 <input name='first_name' type='text' onChange={onChange} required/>
                             </div>
-                            <div className='column mt-half'>
+                            <div className='phone column mt-half'>
                                 <label htmlFor='phone' className='text'>Телефон <span>*</span></label>
-                                <input name='phone' type='phone' onChange={onChange} required/>
+                                <div className="row">
+                                    <input 
+                                    name='phone' 
+                                    type="tel"
+                                    required
+                                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
+                                    onChange={onChange} 
+                                    placeholder='999-999-9999'/>
+                                    <span class="validity"></span>
+                                </div>
                             </div>
                         </form>
                     </div>

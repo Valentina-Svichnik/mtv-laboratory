@@ -48,15 +48,15 @@ const RegistrationPage = () => {
                             <label htmlFor='last_name' className='text'>Фамилия <span>*</span></label>
                             <input name='last_name' type='text' onChange={onChange} required/>
                         </div>
-                        <div className='column mt-half'>
+                        {/* <div className='column mt-half'>
                             <label htmlFor='phone' className='text'>Телефон</label>
                             <input name='phone'/>
-                        </div>
+                        </div> */}
                         <div className='column mt-half'>
                             <label htmlFor='email' className='text'>E-mail <span>*</span></label>
                             <input name='email' type='email' onChange={onChange} required/>
                         </div>
-                        <div className='column mt-half'>
+                        {/* <div className='column mt-half'>
                             <label htmlFor='birthday' className='text'>Дата рождения</label>
                             <input id='birthday'/>
                         </div>
@@ -67,9 +67,9 @@ const RegistrationPage = () => {
                         <div className='column mt-half'>
                             <label htmlFor='password1' className='text'>Придумайте пароль <span>*</span></label>
                             <input id='password1'/>
-                        </div>
+                        </div> */}
                         <div className='column mt-half'>
-                            <label htmlFor='password' className='text'>Повторите пароль <span>*</span></label>
+                            <label htmlFor='password' className='text'>Придумайте пароль <span>*</span></label>
                             <input name='password' type='password' onChange={onChange} required/>
                         </div>
                         <div className='mt-half'>
