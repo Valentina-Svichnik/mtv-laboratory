@@ -57,15 +57,13 @@ class PartnerViewSet(viewsets.ModelViewSet):
     queryset = Partner.objects.all()
     serializer_class = PartnerSerializer
 
-# class CustomerViewSet(viewsets.ModelViewSet):
-#     queryset = Customer.objects.all()
-#     serializer_class = CustomerSerializer
+
 
 
 class CartProductViewSet(viewsets.ModelViewSet):
     queryset = CartProduct.objects.all()
     serializer_class = CartProductSerializer
-    http_method_names = ['post', 'get']
+    http_method_names = ['post', 'get', 'delete', 'put']
 
     def create(self, request, *args, **kwargs):
         data = request.data

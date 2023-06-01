@@ -1,7 +1,6 @@
 import React from 'react';
 import FirstNav from "components/firstNav";
 import SecondNav from "components/secondNav";
-import {Link, NavLink} from "react-router-dom";
 import {Navigate} from 'react-router-dom'
 import {useSelector, useDispatch} from "react-redux";
 import { useState } from "react";

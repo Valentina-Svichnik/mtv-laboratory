@@ -12,7 +12,8 @@ import ProductPage from "components/pages/productPage";
 import RegistrationPage from "components/pages/registrationPage";
 import Categories from "components/pages/categories";
 import Footer from "components/footer";
-import ProfilePage from "./components/pages/profilePage";
+import ProfilePage from "components/pages/profilePage";
+import CartPage from "components/pages/cartPage";
 
 import {checkAuth} from "./features/user";
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
               <Route path="/category/:id" element={<CategoryDetail />} />
               <Route path="/product/:id" element={<ProductPage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/cart" element={<CartPage />} />
             </Routes>
             <Footer />
           </Router>

@@ -1,5 +1,4 @@
 import React from 'react';
-import LeftNav from "../leftNav";
 import FirstNav from "../firstNav";
 import SecondNav from "../secondNav";
 import {useSelector} from "react-redux";

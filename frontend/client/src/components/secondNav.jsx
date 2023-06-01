@@ -5,11 +5,13 @@ import Search from "assets/search.svg";
 import ModalBackCall from "./modalBackCall";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "features/user";
+import { useNavigate } from 'react-router-dom';
 
 const SecondNav = () => {
     const dispatch = useDispatch();
-    const {isAuthenticated} = useSelector(state => state.user)
+    const {isAuthenticated, user} = useSelector(state => state.user)
     const [modalActive, setModalActive] = useState( false)
+    const navigate = useNavigate();
 
     const authLinks = (
         <>
@@ -30,6 +32,10 @@ const SecondNav = () => {
     //
     // });
 
+    const goToCart = async () => {
+        ((!isAuthenticated && user === null ) ? navigate('/login') : navigate('/cart'))
+    }
+
     return (
         <div className='secondNav px-main py-half'>
             <div className='column'>
@@ -47,11 +53,11 @@ const SecondNav = () => {
             </form>
 
             <div className='cart'>
-                <img src={Cart} alt="shopping cart" width='23px'/>
-                <div>
+                <button onClick={goToCart}><img src={Cart} alt="shopping cart" width='23px'/></button>
+                {/* <div>
                     <p className='bold'>Ваша корзина</p>
                     <p className='text'>0 руб.</p>
-                </div>
+                </div> */}
             </div>
             {  isAuthenticated ? authLinks : true}
             <ModalBackCall active={modalActive} setActive={setModalActive}>

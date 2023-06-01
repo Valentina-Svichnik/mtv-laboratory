@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Basket from 'assets/basket.png'
 import { useSelector } from "react-redux";
+import {Navigate} from 'react-router-dom';
+import ModalBackCall from "./modalBackCall";
+
 
 const Card = (p) => {
     const [cart, setCarts] = useState([])
     const [customer, setCustomers] = useState([])
     const [count, setCount] = useState(0)
-    const { user } = useSelector(state => state.user);
+    const { isAuthenticated, user } = useSelector(state => state.user);
+    const [modalActive, setModalActive] = useState(false)
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios({
@@ -28,37 +33,42 @@ const Card = (p) => {
         })
     }, [])
 
-    
-    let user_customer = customer.reduce((obj, item) => {
-        if (item.email=user.email) obj = item
-        return obj
-      }, [])
-
-    
-
-    let user_cart = cart.reduce((obj, item) => {
-        if (item.owner=user_customer.id) obj = item
-        return obj
-      }, [])
-    
 
 
     const addToBasket = async () => {
-        let obj = new FormData()
 
-        obj.append('owner', user_customer.id)
-        obj.append('cart', user_cart.id)
-        obj.append('qty', count)
-        obj.append('product', p.product.id)
-        obj.append('final_price', count * p.product.price)
+        if (!isAuthenticated && user === null ) {
+            navigate('/login')
+        } else {
 
-        await axios({
-            method: 'post',
-            url: 'http://localhost:8000/cartProduct/',
-            data: obj
-        })
+            let user_customer = customer.reduce((obj, item) => {
+                if (item.email=user.email) obj = item
+                return obj
+              }, [])
+        
+        
+            let user_cart = cart.reduce((obj, item) => {
+                if (item.owner=user_customer.id) obj = item
+                return obj
+              }, [])
 
-        setCount( 0)
+              let obj = new FormData()
+
+            obj.append('owner', user_customer.id)
+            obj.append('cart', user_cart.id)
+            obj.append('qty', count)
+            obj.append('product', p.product.id)
+            obj.append('final_price', count * p.product.price)
+
+            await axios({
+                method: 'post',
+                url: `http://localhost:8000/cartProduct/`,
+                data: obj
+            })
+
+            setModalActive(true)
+            // setCount( 0)
+        }   
     }
 
 
@@ -87,6 +97,11 @@ const Card = (p) => {
                 </div>
                 <div className='sale text-white small-bold hide'>-20%</div>
             </div>
+
+            <ModalBackCall active={modalActive} setActive={setModalActive}>
+                <p className='text mb-half'>Товары успешно добавлены!</p>
+                <Link to={{ pathname: `/cart`, fromDashboard: false }} className='text btn-addToBasket mt-half'>Перейти в корзину</Link>
+            </ModalBackCall>
         </div>
     );
 };
