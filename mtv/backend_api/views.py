@@ -16,6 +16,7 @@ from .serializer import (
     ProductDetailSerializer,
     # CustomerSerializer,
     CartProductSerializer,
+    OrderSerializer,
     # CartSerializer
 #     CommentSerializer,
 )
@@ -57,7 +58,10 @@ class PartnerViewSet(viewsets.ModelViewSet):
     queryset = Partner.objects.all()
     serializer_class = PartnerSerializer
 
-
+    
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
 
 
 class CartProductViewSet(viewsets.ModelViewSet):
@@ -76,34 +80,3 @@ class CartProductViewSet(viewsets.ModelViewSet):
         else:
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-    # def post(self, request):
-    #     data = request.data
-
-    #     serializer = CartProductSerializer(data=data)
-
-    #     if not serializer.is_valid():
-    #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    #     cartProduct = serializer.create(serializer.validated_data)
-    #     cartProduct = CartProductSerializer(cartProduct)
-
-    #     return Response(cartProduct.data, status=status.HTTP_201_CREATED)
-
-
-# class CartViewSet(viewsets.ModelViewSet):
-#     queryset = Cart.objects.all()
-#     serializer_class = CartSerializer
-
-#     def post(self, request):
-#         data = request.data
-
-#         serializer = CartSerializer(data=data)
-
-#         if not serializer.is_valid():
-#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-#         cart = serializer.create(serializer.validated_data)
-#         cart = CartSerializer(cart)
-
-#         return Response(cart.data, status=status.HTTP_201_CREATED)

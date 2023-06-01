@@ -69,19 +69,7 @@ class CartProductSerializer(serializers.ModelSerializer):
 
         return cartProduct
 
-
-# class CartSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Cart
-#         fields = '__all__'
-
-#     def create(self, validated_data):
-#         cart = Cart.objects.create_cart(
-#             owner=validated_data['owner'],
-#             products=validated_data['products'],
-#             total_products=validated_data['total_products'],
-#             in_order=validated_data['in_order'],
-#             for_anonymous_user=validated_data['for_anonymous_user'],
-#         )
-
-#         return cart
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = '__all__'

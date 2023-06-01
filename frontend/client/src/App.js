@@ -14,6 +14,8 @@ import Categories from "components/pages/categories";
 import Footer from "components/footer";
 import ProfilePage from "components/pages/profilePage";
 import CartPage from "components/pages/cartPage";
+import OrderingPage from "components/pages/orderingPage";
+import SuccessOrder from "components/pages/successOrder";
 
 import {checkAuth} from "./features/user";
 const App = () => {
@@ -36,6 +38,8 @@ const App = () => {
               <Route path="/product/:id" element={<ProductPage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/cart" element={<CartPage />} />
+              <Route path="/ordering" element={<OrderingPage />} />
+              <Route path="/successOrder" element={<SuccessOrder />} />
             </Routes>
             <Footer />
           </Router>

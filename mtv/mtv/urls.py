@@ -32,6 +32,7 @@ router.register('product', ProductViewSet, basename='product')
 router.register('customer', CustomerViewSet, basename='customer')
 router.register('cartProduct', CartProductViewSet, basename='cartProduct')
 router.register('cart', CartViewSet, basename='cart')
+router.register('order', OrderViewSet, basename='order')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

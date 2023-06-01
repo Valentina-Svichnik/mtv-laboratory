@@ -41,11 +41,11 @@ const RegistrationPage = () => {
                     <h1>Регистрация</h1>
                     <form onSubmit={onSubmit}>
                         <div className='column mt-half'>
-                            <label htmlFor='first_name' className='text'>Имя</label>
+                            <label htmlFor='first_name' className='text'>Имя <span>*</span></label>
                             <input name='first_name' type='text' onChange={onChange} required/>
                         </div>
                         <div className='column mt-half'>
-                            <label htmlFor='last_name' className='text'>Фамилия</label>
+                            <label htmlFor='last_name' className='text'>Фамилия <span>*</span></label>
                             <input name='last_name' type='text' onChange={onChange} required/>
                         </div>
                         <div className='column mt-half'>
@@ -53,7 +53,7 @@ const RegistrationPage = () => {
                             <input name='phone'/>
                         </div>
                         <div className='column mt-half'>
-                            <label htmlFor='email' className='text'>E-mail</label>
+                            <label htmlFor='email' className='text'>E-mail <span>*</span></label>
                             <input name='email' type='email' onChange={onChange} required/>
                         </div>
                         <div className='column mt-half'>
@@ -65,11 +65,11 @@ const RegistrationPage = () => {
                             <input id='gender'/>
                         </div>
                         <div className='column mt-half'>
-                            <label htmlFor='password1' className='text'>Придумайте пароль</label>
+                            <label htmlFor='password1' className='text'>Придумайте пароль <span>*</span></label>
                             <input id='password1'/>
                         </div>
                         <div className='column mt-half'>
-                            <label htmlFor='password' className='text'>Повторите пароль</label>
+                            <label htmlFor='password' className='text'>Повторите пароль <span>*</span></label>
                             <input name='password' type='password' onChange={onChange} required/>
                         </div>
                         <div className='mt-half'>

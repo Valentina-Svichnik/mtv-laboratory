@@ -111,7 +111,7 @@ const CartPage = () => {
                         <p>ИТОГО</p>
                         <p>{ sum }</p>
                     </div>
-                    <a href="" className="text btn-addToBasket">Оформить заказ</a>
+                    <Link to={{ pathname: `/ordering`, fromDashboard: false }} className="text btn-addToBasket">Оформить заказ</Link>
                 </div>
             </div>
             

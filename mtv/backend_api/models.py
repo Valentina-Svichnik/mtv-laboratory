@@ -109,56 +109,7 @@ class CartProduct(models.Model):
         verbose_name = "Товар в корзине"
         verbose_name_plural = "Товары в корзине"
 
-    # def save(self, *args, **kwargs):
-    #     self.final_price = self.qty * self.product.price * (100 - self.product.sale) * 0.01
-    #     super().save(*args, **kwargs)
 
-    # def create_cartProduct(self, user, cart, qty, product, final_price):
-    #     cartProduct = self.model(
-    #         user=user,
-    #         cart=cart,
-    #         qty=qty,
-    #         product=product,
-    #         final_price=final_price,
-    #     )
-
-    #     cartProduct.save(using=self._db)
-    #     return cartProduct
-
-
-# class Cart(models.Model):
-#     # owner = models.ForeignKey('Customer', null=True, verbose_name='Владелец', on_delete=models.CASCADE)
-#     owner = models.OneToOneField(UserAccount, null=True, verbose_name='Владелец', on_delete=models.CASCADE)
-#     products = models.ManyToManyField(CartProduct, blank=True, related_name='related_cart')
-#     total_products = models.PositiveIntegerField(default=0)
-#     final_price = models.DecimalField(max_digits=15, default=0, decimal_places=2, verbose_name='Общая цена')
-#     in_order = models.BooleanField(default=False)
-#     for_anonymous_user = models.BooleanField(default=False)
-
-#     def __str__(self):
-#         return str(self.id)
-
-#     class Meta:
-#         verbose_name = "Корзина"
-#         verbose_name_plural = "Корзина"
-
-#     def save(self, *args, **kwargs):
-#         if self.id:
-#             self.total_products = self.products.count()
-#             self.final_price = sum([cproduct.final_price for cproduct in self.products.all()])
-#         super().save(*args, **kwargs)
-
-#     def create_cart(self, owner, products, total_products, in_order, for_anonymous_user):
-#         cart = self.model(
-#             owner=owner,
-#             products=products,
-#             total_products=total_products,
-#             in_order=in_order,
-#             for_anonymous_user=for_anonymous_user,
-#         )
-
-#         cart.save(using=self._db)
-#         return cart
 
 class Partner (models.Model):
   partner_name = models.CharField(max_length=45, verbose_name='Название компании')
@@ -241,7 +192,7 @@ class Order(models.Model):
     )
     comment = models.TextField(verbose_name='Комментарий к заказу', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True, verbose_name='Дата создания заказа')
-    order_date = models.DateField(verbose_name='Дата получения заказа')
+    # order_date = models.DateField(verbose_name='Дата получения заказа')
     delivery_price = models.DecimalField(max_digits=15, default=0, decimal_places=2, verbose_name='Стоимость доставки')
     price = models.DecimalField(max_digits=15, default=0, decimal_places=2, verbose_name='Стоимость заказа')
 
