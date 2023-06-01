@@ -52,7 +52,7 @@ function CategoryDetail() {
                         <form className='filters'>
                             <div className='row one'>
                                 <p className='text'>Товаров на странице</p>
-                                <input className='filter-count' placeholder='20' />
+                                <input className='filter-count' />
                             </div>
 
                             <div className='row two'>
